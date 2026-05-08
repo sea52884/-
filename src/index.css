@@ -1,0 +1,23 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap');
+@import "tailwindcss";
+@plugin "@tailwindcss/typography";
+
+@theme {
+  --font-sans: "Inter", ui-sans-serif, system-ui, sans-serif;
+  --font-serif: "Playfair Display", ui-serif, Georgia, serif;
+}
+
+@layer base {
+  body {
+    @apply bg-[#F7F6F3] text-[#1A1A1A];
+  }
+}
+
+@layer components {
+  .markdown-report {
+    @apply prose prose-stone max-w-none;
+    @apply prose-p:my-0 prose-p:leading-relaxed;
+    @apply prose-strong:text-current prose-strong:font-bold;
+    @apply prose-ul:my-1 prose-li:my-0;
+  }
+}
