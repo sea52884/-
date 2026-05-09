@@ -1,23 +1,20 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>2026 Exam Check</title>
-    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg'><text y='32' font-size='32'>📄</text></svg>">
+    <title>지도</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <style>
+        #root { width: 100%; height: 600px; }
+    </style>
 </head>
 <body>
     <div id="root"></div>
-    <script type="module" src="/src/main.jsx"></script>
-    <!-- Google Maps API (API 키 포함) -->
-<!-- 아래 코드로 교체 -->
-<script>
-    const apiKey = 'YOUR_ACTUAL_API_KEY_HERE';
-    const script = document.createElement('script');
-    script.src = "https://maps.googleapis.com/maps/api/js?key=AIzaSyBK0gRuDHMvSnSGP_PZGHbGzd3Dzfhn9M";
-     loading="async"
-    script.async = true;
-    document.head.appendChild(script);
-</script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <script>
+        const map = L.map('root').setView([37.7749, -122.4194], 13);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
+        L.marker([37.7749, -122.4194]).addTo(map).bindPopup('위치');
+    </script>
 </body>
 </html>
