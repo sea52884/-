@@ -2,19 +2,76 @@
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
-    <title>지도</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.css" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Google Maps</title>
     <style>
-        #root { width: 100%; height: 600px; }
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f0f0f0;
+        }
+        
+        #map {
+            width: 100%;
+            height: 100vh;
+        }
+        
+        #info {
+            position: absolute;
+            top: 10px;
+            left: 10px;
+            background: white;
+            padding: 15px;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+            z-index: 10;
+        }
     </style>
 </head>
 <body>
-    <div id="root"></div>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.9.4/leaflet.min.js"></script>
+    <div id="map"></div>
+    <div id="info">
+        <h3>Google Maps</h3>
+        <p>San Francisco, CA</p>
+    </div>
+
+    <!-- ★ 실제 API 키로 교체하세요 ★ -->
+    <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyD1gquUkguU-IHQb2d3UzIhnH8M"></script>
+
     <script>
-        const map = L.map('root').setView([37.7749, -122.4194], 13);
-        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png').addTo(map);
-        L.marker([37.7749, -122.4194]).addTo(map).bindPopup('위치');
+        function initMap() {
+            const sanFrancisco = { lat: 37.7749, lng: -122.4194 };
+            
+            const map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 13,
+                center: sanFrancisco,
+                mapTypeControl: true,
+                fullscreenControl: true
+            });
+
+            // 마커 추가
+            const marker = new google.maps.Marker({
+                position: sanFrancisco,
+                map: map,
+                title: 'San Francisco'
+            });
+
+            // 정보 창
+            const infoWindow = new google.maps.InfoWindow({
+                content: '<div><strong>San Francisco</strong><br/>Latitude: 37.7749<br/>Longitude: -122.4194</div>'
+            });
+
+            marker.addListener('click', () => {
+                infoWindow.open(map, marker);
+            });
+        }
+
+        window.addEventListener('load', initMap);
     </script>
 </body>
 </html>
